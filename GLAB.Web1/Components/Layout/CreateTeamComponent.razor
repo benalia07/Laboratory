@@ -1,0 +1,50 @@
+﻿@using GLAB.Web1.Components.Teams.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+
+
+<div class="container">
+
+        <EditForm Model="teamModel" OnValidSubmit="@CreateTeam" class="create-team" FormName="create-team">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            @if (hasError)
+            {
+                <div class="alert alert-warning">
+                    @errorMessage
+                </div>
+            }
+            <div class="small-container">
+            <div class="form-group">
+                    <label for="team-name">Laboratory name Name</label>
+                    <InputSelect class="y-dropdown  form-control" @bind-Value=@teamModel.LaboratoryId>
+                <option  selected="selected">Choose A laboratory</option>
+                    @foreach (var lab in Laboratories)
+                    {
+                        <option value=@lab.LaboratoryId>@lab.Name</option>
+                    }
+            </InputSelect>
+            </div>
+                <div class="form-group">
+                    <label for="team-name">Team name</label>
+                    <InputText id="team-name" @bind-Value="teamModel.TeamName" />
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="team-acronym">Team acronym</label>
+                <InputText id="team-acronym" @bind-Value="teamModel.TeamAcronyme" />
+                </div>
+
+            </div>
+
+            <div class="small-container ">
+                <div class="button-groupe">
+                <button type="submit" class="confirm-btn" >Confirm</button>
+                <button type="button" class="cancel-btn" >Cancel</button>
+                </div>
+            </div>
+
+        </EditForm>
+    
+</div>

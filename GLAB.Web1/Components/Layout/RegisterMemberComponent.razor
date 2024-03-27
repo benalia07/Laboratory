@@ -1,0 +1,65 @@
+﻿
+@using GLAB.Web1.Components.Members.Models
+@using Microsoft.AspNetCore.Components.Forms
+@inject NavigationManager NavigationManager
+@if(loaded){
+<div class="container">
+
+    <EditForm Model="registerMemberModel" OnValidSubmit="@RegisterMember" class="create-team" FormName="Register-Member">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        @if (hasError)
+        {
+            <div class="alert alert-warning">
+                @errorMessage
+            </div>
+        }
+        <div class="small-container">
+            
+            <div class="form-group">
+                    <label for="NIC">NIC</label>
+                    <InputText id="NIC" @bind-Value="registerMemberModel.NIC" />
+
+            </div>
+            <div class="form-group">
+                    <label for="PhoneNumber">PhoneNumber</label>
+                    <InputText id="PhoneNumber" @bind-Value="registerMemberModel.PhoneNumber" />
+
+            </div>
+                <div class="form-group">
+                    <label for="Grade">Grade</label>
+                    <InputSelect class="y-dropdown  " @bind-Value=@registerMemberModel.GradeId>
+                        <option selected="selected">Choose A Grade</option>
+                        @foreach (var grade in Grades)
+                        {
+                            <option value=@grade.GradeId>@grade.GradeName</option>
+                        }
+                    </InputSelect>
+                </div>
+            <div class="form-group">
+                    <label for="PassWord">Password</label>
+                    <input type="password" id="PassWord" @bind="registerMemberModel.PassWord" />
+
+            </div>
+            <div class="form-group">
+                    <label for="ConfirmPassWord-Name">Confirm Password</label>
+                    <input type="password" id="ConfirmPassWord" @bind="registerMemberModel.ConfirmPassWord" />
+
+            </div>
+
+
+         
+
+        </div>
+
+        <div class="small-container ">
+            <div class="button-groupe">
+                <button type="submit" class="confirm-btn">Confirm</button>
+                <button type="button" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+
+</div>
+}
+else{<h1>jgcdghsjhjgfhvdhghhbgfhcvjklhgjfchnlkjhgkyjfcghn</h1>}

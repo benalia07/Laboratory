@@ -1,0 +1,62 @@
+﻿@page "/Labs/Create"
+@rendermode InteractiveServer
+  <nav>
+        <span> <i class="fa-solid fa-flask fa-rotate-by" style="color: #4fa66e; --fa-rotate-angle: 80E99deg;"></i> Create  Laboratory </span>
+        <span><a href="login.html">Singi in</a></span>
+    </nav>
+
+
+<EditForm data-multi-step class="multi-step-form" Model="newlabo" OnValidSubmit="save" FormName="createLaboForm">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+
+        <div class="form-group">
+             <InputText class="form-control" @bind-Value=@newlabo.Name placeholder="Name" required/>
+        </div>
+
+        <div class="form-group">
+            <InputText class="form-control" @bind-Value=@newlabo.University placeholder="University" required/>
+        </div>
+
+        <div class="form-group">
+        <InputText class="form-control" @bind-Value=@newlabo.Faculty placeholder="Faculty" required />
+        </div>
+
+        <div class="form-group">
+        <InputText class="form-control" @bind-Value=@newlabo.Departement placeholder="Departement" required />
+        </div>
+
+
+         <div class="form-group">
+        <InputText class="form-control" @bind-Value=@newlabo.Acronyme placeholder="Acronyme" required />
+        </div>
+
+         <div class="form-group">
+        <InputText class="form-control" @bind-Value=@newlabo.PhoneNumber placeholder="PhoneNumber" required />
+        </div>
+
+        <div class="form-group">
+        <InputText class="form-control" @bind-Value=@newlabo.Email placeholder="Email" required />
+        </div>
+
+        <div class="form-group">
+        <InputText class="form-control" @bind-Value=@newlabo.Adresse placeholder="Adresse" required />
+        </div>
+
+         <div class="form-group">
+         <InputText class="form-control" @bind-Value=@newlabo.NumAgrement placeholder="NumAgrement" pattern="[0-9]{9}" autofocus required title="The Number Agrement Consists of 9 Digits "/>
+        </div>
+
+     <div class="form-group">
+        <InputText class="form-control" @bind-Value=@newlabo.WebSite placeholder="WebSite" required />
+    </div>
+
+
+    <div class="button-next-submit">
+            <button type="submit">Create Labo</button>
+    </div>
+    
+
+
+</EditForm>
