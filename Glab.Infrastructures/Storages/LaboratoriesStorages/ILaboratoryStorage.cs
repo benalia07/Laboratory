@@ -1,5 +1,6 @@
 using Glab.Domains.Models.Laboratories;
 using GLAB.Domains.Models.Laboratories;
+using System.Data;
 
 namespace GLAB.Infra.Storages.LaboratoriesStorages;
 
@@ -23,4 +24,6 @@ public interface ILaboratoryStorage
 
     Task<Laboratory?> SelectLaboratoryByName(string name);
      Task<bool> LaboratoryExistsByName(string name);
+    Task<DataSet> GetLaboratoryDataByIdAsync(string teamId);
+
 }

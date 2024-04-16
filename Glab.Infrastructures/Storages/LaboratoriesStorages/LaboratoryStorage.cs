@@ -209,5 +209,30 @@ public class LaboratoryStorage : ILaboratoryStorage
     }
 
 
+    public async Task<DataSet> GetLaboratoryDataByIdAsync(string labId)
+    {
+        string storedProcedureName = "GetTLaboratoryById";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@LaboratoryId", labId);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataSet dataSet = new DataSet();
+
+                await connection.OpenAsync();
+                adapter.Fill(dataSet);
+
+                return dataSet;
+            }
+        }
+    }
+
+
+
+
 
 }

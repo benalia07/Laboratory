@@ -138,9 +138,9 @@ public class TeamStorage : ITeamStorage
     {
         return new()
         {
-            TeamName = row["TeamName"] == DBNull.Value ? default :(string)row["TeamName"],
+            TeamName = row["TeamName"] == DBNull.Value ? default : (string)row["TeamName"],
             TeamId = row["TeamId"] == DBNull.Value ? default : (string)row["TeamId"],
-            LaboratoryId = row["LaboratoryId"]== DBNull.Value ? default :(string)row["LaboratoryId"],
+            LaboratoryId = row["LaboratoryId"] == DBNull.Value ? default : (string)row["LaboratoryId"],
             Status = (TeamStatus)((int)row["Status"])
         };
     }
@@ -201,4 +201,65 @@ public class TeamStorage : ITeamStorage
         await connection.OpenAsync();
         await cmd.ExecuteNonQueryAsync();
     }
+
+
+    public async Task<DataSet> GetTeamDataByIdAsync(string teamId)
+    {
+        string storedProcedureName = "GetTeamById";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(storedProcedureName, connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@TeamId", teamId);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataSet dataSet = new DataSet();
+
+                await connection.OpenAsync();
+                adapter.Fill(dataSet);
+
+                return dataSet;
+            }
+        }
+    }
+
+    /*DatabaseService databaseService = new DatabaseService("YourConnectionString");
+DataSet dataSet = await databaseService.GetTeamDataByIdAsync("YourTeamId");
+
+// Afficher les données de la première table (VTEAM)
+Console.WriteLine("Table VTEAM:");
+foreach (DataRow row in dataSet.Tables[0].Rows)
+{
+    foreach (DataColumn col in dataSet.Tables[0].Columns)
+    {
+        Console.Write(col.ColumnName + ": " + row[col] + "\t");
+    }
+    Console.WriteLine();
+}
+
+// Afficher les données de la deuxième table (VMEMBER)
+Console.WriteLine("\nTable VMEMBER:");
+foreach (DataRow row in dataSet.Tables[1].Rows)
+{
+    foreach (DataColumn col in dataSet.Tables[1].Columns)
+    {
+        Console.Write(col.ColumnName + ": " + row[col] + "\t");
+    }
+    Console.WriteLine();
+}
+
+// Afficher les données de la troisième table (VLABORATORY)
+Console.WriteLine("\nTable VLABORATORY:");
+foreach (DataRow row in dataSet.Tables[2].Rows)
+{
+    foreach (DataColumn col in dataSet.Tables[2].Columns)
+    {
+        Console.Write(col.ColumnName + ": " + row[col] + "\t");
+    }
+    Console.WriteLine();
+}
+*/
+
 }

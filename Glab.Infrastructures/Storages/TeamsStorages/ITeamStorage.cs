@@ -1,5 +1,6 @@
 ﻿using GLAB.Domains.Models.Members;
 using GLAB.Domains.Models.Teams;
+using System.Data;
 
 namespace GLAB.Infra.Storages.TeamsStorages;
 
@@ -26,4 +27,6 @@ public interface ITeamStorage
     Task<bool> IsTeamInLaboratory(string TeamId, string LaboratoryId);
 
     Task<List<Member>> GetTeamMembers(string TeamId);
+    Task<DataSet> GetTeamDataByIdAsync(string teamId);
+
 }
